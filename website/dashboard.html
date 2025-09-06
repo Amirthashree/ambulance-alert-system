@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard - Ambulancy</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
+
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background-color: #e63946; /* Ambulance Red */
+    color: #ffffff;
+    padding: 35px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  header h1 {
+    font-weight: 600;
+    font-size: 2.7rem;
+  }
+  nav {
+    margin-top: 15px;
+  }
+  nav button {
+    background-color: #06d6a0; /* Emergency Green */
+    color: #fff;
+    border: none;
+    padding: 10px 26px;
+    margin: 0 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(6, 214, 160, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  nav button:hover {
+    background-color: #05b88a; /* Slightly darker green */
+    transform: scale(1.05);
+  }
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f8f8f8; /* Soft gray for panel */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  h2 {
+    color: #e63946; /* Red for headings */
+    font-weight: 600;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+  }
+  #map iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  #traffic-signal {
+    margin: 35px 0;
+  }
+  #signal-light {
+    width: 60px;
+    height: 180px;
+    margin: 0 auto;
+    background: #1a1a1a; /* Deep Black */
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+  }
+  .light {
+    width: 42px;
+    height: 42px;
+    margin: 14px auto;
+    border-radius: 50%;
+    background: gray;
+    opacity: 0.3;
+    transition: opacity 0.5s ease, box-shadow 0.5s ease;
+  }
+  .light.active {
+    opacity: 1;
+    box-shadow: 0 0 20px 6px;
+    animation: glowPulse 1.5s infinite alternate;
+  }
+  .red.active { 
+    background: #e63946;
+    box-shadow: 0 0 20px 6px #e63946;
+  }
+  .yellow.active {
+    background: #ffd166;
+    box-shadow: 0 0 20px 6px #ffd166;
+  }
+  .green.active {
+    background: #06d6a0;
+    box-shadow: 0 0 20px 6px #06d6a0;
+  }
+  @keyframes glowPulse {
+    0% {
+      filter: brightness(1);
+      box-shadow: 0 0 20px 8px currentColor;
+    }
+    100% {
+      filter: brightness(1.2);
+      box-shadow: 0 0 35px 15px currentColor;
+    }
+  }
+  #alert-box, #hospital-alert {
+    margin: 30px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    min-height: 48px;
+    border-radius: 12px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    background-color: #ffffff; /* white */
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #control-panel {
+    max-width: 600px;
+    margin: 30px auto 50px;
+    padding: 25px;
+    background: #ffffff; /* white */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  #distance-slider {
+    width: 100%;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+  #distance-value, #eta-value {
+    font-weight: 700;
+    color: #e63946;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dashboard</h1>
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='about.html'">About</button>
+  </nav>
+</header>
+
+<main>
+  <section id="map">
+    <h2>Ambulance Location</h2>
+    <iframe src="https://maps.google.com/maps?q=hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+  </section>
+
+  <section id="traffic-signal">
+    <h2>Traffic Signal</h2>
+    <div id="signal-light">
+      <div class="light red"></div>
+      <div class="light yellow"></div>
+      <div class="light green"></div>
+    </div>
+  </section>
+
+  <section id="alert-box">
+    <h2>Alert</h2>
+    <p id="alert-text"></p>
+  </section>
+
+  <section id="hospital-alert">
+    <h2>Hospital Alert</h2>
+    <p id="hospital-text"></p>
+  </section>
+
+  <section id="control-panel">
+    <h2>Simulate Ambulance Distance</h2>
+    <input type="range" id="distance-slider" min="0" max="100" value="100" />
+    <p>Distance: <span id="distance-value"></span> meters</p>
+    <p>Estimated Arrival Time: <span id="eta-value"></span> minutes</p>
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const redLight = document.querySelector('.light.red');
+    const yellowLight = document.querySelector('.light.yellow');
+    const greenLight = document.querySelector('.light.green');
+    const alertText = document.getElementById('alert-text');
+    const hospitalText = document.getElementById('hospital-text');
+    const distanceSlider = document.getElementById('distance-slider');
+    const distanceValue = document.getElementById('distance-value');
+    const etaValue = document.getElementById('eta-value');
+
+    function updateLights(distance) {
+      redLight.classList.remove('active');
+      yellowLight.classList.remove('active');
+      greenLight.classList.remove('active');
+
+      if (distance > 60) {
+        redLight.classList.add('active');
+        alertText.textContent = "No ambulance nearby";
+        hospitalText.textContent = "No active notifications";
+      } else if (distance > 20) {
+        yellowLight.classList.add('active');
+        alertText.textContent = `🚑 Ambulance approaching – ${distance}m away!`;
+        hospitalText.textContent = "Hospital notified – ETA: " + Math.ceil(distance / 10) + " mins";
+      } else {
+        greenLight.classList.add('active');
+        alertText.textContent = "🚑 Ambulance is here!";
+        hospitalText.textContent = "Hospital ready to receive patient";
+      }
+    }
+
+    distanceSlider.addEventListener('input', () => {
+      const dist = parseInt(distanceSlider.value);
+      distanceValue.textContent = dist;
+      const eta = Math.ceil(dist / 10);
+      etaValue.textContent = eta;
+      updateLights(dist);
+    });
+
+    // Initialize on page load
+    const initialDist = parseInt(distanceSlider.value);
+    distanceValue.textContent = initialDist;
+    etaValue.textContent = Math.ceil(initialDist / 10);
+    updateLights(initialDist);
+  });
+</script>
+</body>
+</html>
