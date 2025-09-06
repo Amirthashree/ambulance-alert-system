@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - Ambulancy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
+  
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffffff; /* Clean White */
+      color: #1a1a1a; /* Deep Black */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-bottom: 50px;
+    }
+    header {
+      background-color: #e63946; /* Ambulance Red */
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+    nav {
+      margin-top: 15px;
+    }
+    nav button {
+      background-color: #06d6a0; /* Emergency Green */
+      color: #fff;
+      border: none;
+      padding: 12px 35px;
+      margin: 0 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 35px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(6, 214, 160, 0.5);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    nav button:hover {
+      background-color: #05b88a; /* Darker Green */
+      transform: scale(1.05);
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #f5f5f5; /* Soft Gray panel background */
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      padding: 40px 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #e63946; /* Ambulance Red */
+      font-weight: 700;
+      font-size: 2.4rem;
+      margin-bottom: 25px;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #1a1a1a;
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+    ul.team-list {
+      list-style: none;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 40px;
+      padding-left: 0;
+    }
+    ul.team-list li {
+      margin: 10px 0;
+      padding-left: 16px;
+      position: relative;
+      text-align: left;
+    }
+    ul.team-list li::before {
+      content: "•";
+      color: #06d6a0; /* Emergency Green bullet */
+      position: absolute;
+      left: 0;
+      font-size: 1.5rem;
+      line-height: 0;
+      top: 6px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 40px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Ambulancy</h1>
+    <nav>
+      <button onclick="location.href='index.html'">Home</button>
+      <button onclick="location.href='dashboard.html'">Dashboard</button>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Team Daggers</h2>
+      <ul class="team-list">
+        <li>Amirtha Shree L</li>
+        <li>Divya Dharshini S</li>
+        <li>Harshawardhini MG</li>
+        <li>Mahalakshmi P</li>
+      </ul>
+      <h2>Hackathon Details</h2>
+      <p>
+        Project developed for the 2025 Hackathon to address ambulance delay issues in traffic using IoT and smart alerts.
+      </p>
+      <h2>Scope of the System</h2>
+      <p>
+        The system reduces traffic delays for ambulances by automatic traffic light control and hospital alerts, improving emergency response efficiency.
+      </p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Ambulancy Team DAGGERS
+  </footer>
+</body>
+</html>
